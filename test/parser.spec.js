@@ -15,7 +15,9 @@ describe('Parser', function () {
     });
 
     condition.should.deep.equal({
-      foo: 'bar'
+      operator: '==',
+      property: ['foo'],
+      value: 'bar'
     });
   });
 });
