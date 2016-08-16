@@ -6,8 +6,15 @@ const compileCondition = function (query) {
   return queryParser.parse(query);
 };
 
+const matchCondition = function () {
+  // TODO: Match the condition against the object
+};
+
 const fulfills = function (obj, condition) {
-  // TODO: Do magic
+  if (typeof condition === 'string') {
+    condition = compileCondition(condition);
+  }
+  return matchCondition(obj, condition);
 };
 
 module.exports = fulfills;
