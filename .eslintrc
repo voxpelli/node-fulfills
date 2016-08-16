@@ -1,0 +1,7 @@
+{
+  "extends": "semistandard",
+  "root": true,
+  "rules": {
+    "valid-jsdoc": 2
+  }
+}

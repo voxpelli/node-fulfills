@@ -1,0 +1,10 @@
+/coverage
+/.env
+
+/test
+/.travis.yml
+/.eslintrc
+/.editorconfig
+/Gruntfile.js
+
+/condition-parser.pegjs
