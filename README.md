@@ -5,7 +5,7 @@
 [![Dependency Status](https://gemnasium.com/voxpelli/node-fulfills.svg)](https://gemnasium.com/voxpelli/node-fulfills)
 [![js-semistandard-style](https://img.shields.io/badge/code%20style-semistandard-brightgreen.svg?style=flat)](https://github.com/Flet/semistandard)
 
-Checks whether an object fulfills a specified condition
+Checks whether or not an object fulfills a specified condition
 
 ## Requirements
 
@@ -14,7 +14,7 @@ Requires at least Node.js 6.x
 ## Installation
 
 ```bash
-npm installfulfills --save
+npm install fulfills --save
 ```
 
 
