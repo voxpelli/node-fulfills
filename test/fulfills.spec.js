@@ -19,6 +19,10 @@ describe('Fulfills', function () {
         'sak2',
         'sak3'
       ],
+      complex: [
+        { xyz: ['bob1', 'bob2'] },
+        { xyz: ['bob3', 'bob4', 'bob5'] }
+      ],
       abc: { def: { ghi: 'bar' } }
     };
   });
@@ -113,6 +117,23 @@ describe('Fulfills', function () {
         property: ['list'],
         value: 'sak1'
       }).should.not.be.ok;
+    });
+
+    it('should be able to look into deep nested array structures', () => {
+      fulfills(testObject, {
+        operator: '===',
+        property: [
+          'complex',
+          {
+            array: true,
+            property: [
+              'xyz',
+              { array: true }
+            ]
+          }
+        ],
+        value: 'bob4'
+      }).should.be.ok;
     });
   });
 

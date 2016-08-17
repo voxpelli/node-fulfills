@@ -34,7 +34,7 @@ const matchValueAgainstCondition = function (value, condition) {
 };
 
 const matchIndividualCondition = function (obj, remainingProperty, condition) {
-  if (obj === undefined || obj === null || !remainingProperty.length) {
+  if (obj === undefined || obj === null || !remainingProperty || !remainingProperty.length) {
     return matchValueAgainstCondition(obj, condition);
   }
 
@@ -49,7 +49,7 @@ const matchIndividualCondition = function (obj, remainingProperty, condition) {
     if (!Array.isArray(obj)) {
       return false;
     }
-    return obj.some(item => matchIndividualCondition(item, remainingProperty, condition));
+    return obj.some(item => matchIndividualCondition(item, key.property, condition));
   } else if (typeof key !== 'string') {
     throw new Error('Unknown key type');
   }
