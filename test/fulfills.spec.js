@@ -14,11 +14,16 @@ describe('Fulfills', function () {
       foo: 'bar',
       num: 123,
       falsk: false,
+      list: [
+        'sak1',
+        'sak2',
+        'sak3'
+      ],
       abc: { def: { ghi: 'bar' } }
     };
   });
 
-  describe('comparison operators', () => {
+  describe('basic value matching', () => {
     it('should be able match a simple condition', () => {
       fulfills(testObject, {
         operator: '===',
@@ -84,6 +89,30 @@ describe('Fulfills', function () {
         property: ['nonexisting', 'def', 'ghi'],
         value: 'bar'
       }).should.be.ok;
+    });
+  });
+
+  describe('array matching', () => {
+    it('should be able match a value in an array', () => {
+      fulfills(testObject, {
+        operator: '===',
+        property: ['list', { array: true }],
+        value: 'sak1'
+      }).should.be.ok;
+
+      fulfills(testObject, {
+        operator: '===',
+        property: ['list', { array: true }],
+        value: 'error'
+      }).should.not.be.ok;
+    });
+
+    it('should not look inside array when not requested to', () => {
+      fulfills(testObject, {
+        operator: '===',
+        property: ['list'],
+        value: 'sak1'
+      }).should.not.be.ok;
     });
   });
 

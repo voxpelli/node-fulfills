@@ -34,24 +34,27 @@ const matchValueAgainstCondition = function (value, condition) {
 };
 
 const matchIndividualCondition = function (obj, remainingProperty, condition) {
+  if (obj === undefined || obj === null || !remainingProperty.length) {
+    return matchValueAgainstCondition(obj, condition);
+  }
+
   remainingProperty = [].concat(remainingProperty);
 
   const key = remainingProperty.shift();
 
   if (typeof key === 'object') {
-    // TODO: It's probably an array – deal with it!
-    throw new Error('Unimplemented key type');
+    if (!key.array) {
+      throw new Error('Unimplemented key type');
+    }
+    if (!Array.isArray(obj)) {
+      return false;
+    }
+    return obj.some(item => matchIndividualCondition(item, remainingProperty, condition));
   } else if (typeof key !== 'string') {
     throw new Error('Unknown key type');
   }
 
-  const value = obj[key];
-
-  if (value !== undefined && value !== null && remainingProperty.length) {
-    return matchIndividualCondition(value, remainingProperty, condition);
-  }
-
-  return matchValueAgainstCondition(value, condition);
+  return matchIndividualCondition(obj[key], remainingProperty, condition);
 };
 
 const matchDuoCondition = function (obj, condition) {
