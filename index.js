@@ -28,11 +28,13 @@ const matchIndividualCondition = function (obj, remainingProperty, condition) {
     throw new Error('Unknown key type');
   }
 
-  if (obj[key] && remainingProperty.length) {
-    return matchIndividualCondition(obj[key], remainingProperty, condition);
+  const value = obj[key];
+
+  if (value !== undefined && value !== null && remainingProperty.length) {
+    return matchIndividualCondition(value, remainingProperty, condition);
   }
 
-  return matchValueAgainstCondition(obj[key], condition);
+  return matchValueAgainstCondition(value, condition);
 };
 
 const matchCondition = function (obj, condition) {
