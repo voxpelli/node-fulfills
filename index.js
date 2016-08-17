@@ -7,12 +7,29 @@ const compileCondition = function (query) {
 };
 
 const matchValueAgainstCondition = function (value, condition) {
-  if (condition.operator === '==') {
-    return value == condition.value; // eslint-disable-line
-  } else if (condition.operator === '!=') {
-    return value != condition.value; // eslint-disable-line
-  } else {
-    throw new Error('unimplemented operator "' + condition.operator + '"');
+  if (condition.operator === undefined && condition.value === undefined) {
+    return !!value;
+  }
+
+  switch (condition.operator) {
+    case '===':
+      return value === condition.value;
+    case '!==':
+      return value !== condition.value;
+    case '<':
+      return value < condition.value;
+    case '>':
+      return value > condition.value;
+    case '<=':
+      return value <= condition.value;
+    case '>=':
+      return value >= condition.value;
+    case '==':
+      return value == condition.value; // eslint-disable-line
+    case '!=':
+      return value != condition.value; // eslint-disable-line
+    default:
+      throw new Error('unimplemented operator "' + condition.operator + '"');
   }
 };
 
