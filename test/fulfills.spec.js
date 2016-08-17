@@ -77,5 +77,13 @@ describe('Fulfills', function () {
       fulfills(testObject, { property: ['foo'] }).should.be.ok;
       fulfills(testObject, { property: ['falsk'] }).should.not.be.ok;
     });
+
+    it('should be able match against non-found values', () => {
+      fulfills(testObject, {
+        operator: '!=',
+        property: ['nonexisting', 'def', 'ghi'],
+        value: 'bar'
+      }).should.be.ok;
+    });
   });
 });
