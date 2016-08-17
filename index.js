@@ -29,7 +29,7 @@ const matchValueAgainstCondition = function (value, condition) {
     case '!=':
       return value != condition.value; // eslint-disable-line
     default:
-      throw new Error('unimplemented operator "' + condition.operator + '"');
+      throw new Error('Unknown operator "' + condition.operator + '"');
   }
 };
 
@@ -54,11 +54,33 @@ const matchIndividualCondition = function (obj, remainingProperty, condition) {
   return matchValueAgainstCondition(value, condition);
 };
 
+const matchDuoCondition = function (obj, condition) {
+  if (matchCondition(obj, condition.left)) {
+    if (condition.operator === 'AND') {
+      return matchCondition(obj, condition.right);
+    } else if (condition.operator === 'OR') {
+      return true;
+    } else {
+      throw new Error('Unknown operator "' + condition.operator + '"');
+    }
+  } else if (condition.operator === 'AND') {
+    return false;
+  } else if (condition.operator === 'OR') {
+    return matchCondition(obj, condition.right);
+  } else {
+    throw new Error('Unknown operator "' + condition.operator + '"');
+  }
+};
+
 const matchCondition = function (obj, condition) {
-  // TODO: Match the condition against the object
   if (condition.property) {
     return matchIndividualCondition(obj, condition.property, condition);
   }
+
+  if (condition.left && condition.right) {
+    return matchDuoCondition(obj, condition);
+  }
+
   throw new Error('Unimplemented condition structure');
 };
 
