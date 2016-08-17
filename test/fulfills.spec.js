@@ -6,6 +6,7 @@ chai.should();
 
 describe('Fulfills', function () {
   const fulfills = require('../');
+  const complex = require('./complex');
 
   let testObject;
 
@@ -192,6 +193,12 @@ describe('Fulfills', function () {
           value: 'error'
         }
       }).should.be.ok;
+    });
+  });
+
+  describe('complex', () => {
+    it('should be able to handle the most complex example', () => {
+      fulfills(testObject, complex.parsedCondition).should.be.ok;
     });
   });
 });
