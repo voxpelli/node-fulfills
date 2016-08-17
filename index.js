@@ -81,6 +81,10 @@ const matchCondition = function (obj, condition) {
     return matchDuoCondition(obj, condition);
   }
 
+  if (condition.not) {
+    return !matchCondition(obj, condition.not);
+  }
+
   throw new Error('Unimplemented condition structure');
 };
 

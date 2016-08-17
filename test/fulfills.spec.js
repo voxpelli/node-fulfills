@@ -133,5 +133,15 @@ describe('Fulfills', function () {
         }
       }).should.not.be.ok;
     });
+
+    it('should be able match a NOT condition', () => {
+      fulfills(testObject, {
+        not: {
+          operator: '===',
+          property: ['foo'],
+          value: 'error'
+        }
+      }).should.be.ok;
+    });
   });
 });
