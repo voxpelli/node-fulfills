@@ -1,7 +1,6 @@
 # Fulfills
 
 [![Build Status](https://travis-ci.org/voxpelli/node-fulfills.svg?branch=master)](https://travis-ci.org/voxpelli/node-fulfills)
-[![Coverage Status](https://coveralls.io/repos/voxpelli/node-fulfills/badge.svg)](https://coveralls.io/r/voxpelli/node-fulfills)
 [![Dependency Status](https://gemnasium.com/voxpelli/node-fulfills.svg)](https://gemnasium.com/voxpelli/node-fulfills)
 [![js-semistandard-style](https://img.shields.io/badge/code%20style-semistandard-brightgreen.svg?style=flat)](https://github.com/Flet/semistandard)
 
@@ -16,7 +15,6 @@ Requires at least Node.js 6.x
 ```bash
 npm install fulfills --save
 ```
-
 
 ## Usage
 
