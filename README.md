@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/voxpelli/node-fulfills.svg?branch=master)](https://travis-ci.org/voxpelli/node-fulfills)
 [![Coverage Status](https://coveralls.io/repos/voxpelli/node-fulfills/badge.svg)](https://coveralls.io/r/voxpelli/node-fulfills)
 [![dependencies Status](https://david-dm.org/voxpelli/node-fulfills/status.svg)](https://david-dm.org/voxpelli/node-fulfills)
+[![Known Vulnerabilities](https://snyk.io/test/github/voxpelli/node-fulfills/badge.svg?targetFile=package.json)](https://snyk.io/test/github/voxpelli/node-fulfills?targetFile=package.json)
 [![js-semistandard-style](https://img.shields.io/badge/code%20style-semistandard-brightgreen.svg?style=flat)](https://github.com/Flet/semistandard)
 
 Checks whether or not an object fulfills a specified condition
