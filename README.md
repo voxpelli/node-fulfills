@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/voxpelli/node-fulfills.svg?branch=master)](https://travis-ci.org/voxpelli/node-fulfills)
 [![dependencies Status](https://david-dm.org/voxpelli/node-fulfills/status.svg)](https://david-dm.org/voxpelli/node-fulfills)
 [![js-semistandard-style](https://img.shields.io/badge/code%20style-semistandard-brightgreen.svg?style=flat)](https://github.com/Flet/semistandard)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fvoxpelli%2Fnode-fulfills.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fvoxpelli%2Fnode-fulfills?ref=badge_shield)
 
 Checks whether or not an object fulfills a specified condition
 
@@ -87,3 +88,7 @@ All work just like the javascript comparison operators does.
 * `OR` (alias: `||`)
 * `AND` (alias: `&&`)
 * `NOT` (alias: `!`)
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fvoxpelli%2Fnode-fulfills.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fvoxpelli%2Fnode-fulfills?ref=badge_large)
