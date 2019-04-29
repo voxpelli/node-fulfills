@@ -28,7 +28,7 @@ const obj = {
 };
 
 // Performant option – useful if the same condition is used over and over again
-const condition = fulfills.compile('property.subproperty = value OR property.subproperty = 123');
+const condition = fulfills.compileCondition('property.subproperty = value OR property.subproperty = 123');
 
 if (fulfills(obj, condition)) {
   // ...
