@@ -1,6 +1,6 @@
 # Fulfills
 
-[![Build Status](https://travis-ci.org/voxpelli/node-fulfills.svg?branch=master)](https://travis-ci.org/voxpelli/node-fulfills)
+[![Build Status](https://travis-ci.com/voxpelli/node-fulfills.svg?branch=master)](https://travis-ci.com/voxpelli/node-fulfills)
 [![Coverage Status](https://coveralls.io/repos/voxpelli/node-fulfills/badge.svg)](https://coveralls.io/r/voxpelli/node-fulfills)
 [![dependencies Status](https://david-dm.org/voxpelli/node-fulfills/status.svg)](https://david-dm.org/voxpelli/node-fulfills)
 [![Known Vulnerabilities](https://snyk.io/test/github/voxpelli/node-fulfills/badge.svg?targetFile=package.json)](https://snyk.io/test/github/voxpelli/node-fulfills?targetFile=package.json)
