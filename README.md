@@ -10,7 +10,7 @@ Checks whether or not an object fulfills a specified condition
 
 ## Requirements
 
-Requires at least Node.js 6.x
+Requires at least Node.js 10.x
 
 ## Installation
 
