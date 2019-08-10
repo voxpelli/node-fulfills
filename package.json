@@ -11,14 +11,14 @@
   },
   "main": "index.js",
   "scripts": {
+    "build": "pegjs condition-parser.pegjs condition-parser.js",
     "check:dependency-check": "dependency-check *.js 'test/**/*.js' --no-dev",
     "check:installed-check": "installed-check -i eslint",
     "check:lint": "eslint .",
+    "prepublish": "npm run build",
     "test:mocha": "NODE_ENV=test nyc --reporter=lcov --reporter text mocha test/**/*.spec.js",
     "test": "run-p check:* && run-p test:*",
-    "build": "pegjs condition-parser.pegjs condition-parser.js",
-    "watch": "nodemon -e pegjs -x \"npm run build\"",
-    "prepublish": "npm run build"
+    "watch": "nodemon -e pegjs -x \"npm run build\""
   },
   "husky": {
     "hooks": {
