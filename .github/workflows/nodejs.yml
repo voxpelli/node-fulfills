@@ -1,0 +1,31 @@
+name: Node CI
+
+on: [push]
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        node:
+        - 10
+        - 12
+        platform:
+        - ubuntu-latest
+        - windows-latest
+        - macos-latest
+
+    name: ${{matrix.platform}} w/ Node.js ${{matrix.node}}.x
+    runs-on: ${{matrix.platform}}
+
+    steps:
+    - uses: actions/checkout@master
+    - name: Use Node.js ${{matrix.node}}.x
+      uses: actions/setup-node@v1
+      with:
+        version: ${{matrix.node}}.x
+    - name: npm install, build, and test
+      run: |
+        npm install
+        npm run build --if-present
+        npm test
