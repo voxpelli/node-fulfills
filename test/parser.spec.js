@@ -29,4 +29,13 @@ describe('Parser', function () {
       value: 'bar'
     });
   });
+
+  it('should permit certain non-alpha characters', () => {
+    const condition = 'foo-bar_abc = bar';
+    compileCondition(condition).should.deep.equal({
+      operator: '==',
+      property: ['foo-bar_abc'],
+      value: 'bar'
+    });
+  });
 });
