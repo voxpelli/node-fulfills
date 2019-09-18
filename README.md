@@ -62,7 +62,7 @@ To look for a value in an array rather than compare the value to the array itsel
 
 The array syntax and subproperties can be combined however one likes. For example: `property.subproperty[][].propertyOfObjectInATwoLevelDeepArray`
 
-Complex property names can be specified like `["very complex property name"]`. Values in suck property names can be escaped, like: `["property name including a \"funny\" char"]`
+Complex property names can be specified like `["very complex property name"]`. Values in such property names can be escaped, like: `["property name including a \"funny\" char"]`
 
 ### Supported values
 
