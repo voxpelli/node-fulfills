@@ -32,7 +32,7 @@ subProperty
   / '[]' tail:(subProperty)? { var result = { array: true }; if (tail) { result.property = tail; } return [result]; }
 
 property_name
-  = term:[a-z-]+ { return term.join(''); }
+  = term:[a-zA-Z-]+ { return term.join(''); }
 
 value
   = quoted_value
@@ -48,7 +48,7 @@ bool
   / 'false' { return false; }
 
 alpha
-  = term:[a-z]+ { return term.join(''); }
+  = term:[a-zA-Z]+ { return term.join(''); }
 
 integer
   = digits:[0-9]+ { return parseInt(digits.join(""), 10); }

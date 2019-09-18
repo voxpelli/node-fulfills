@@ -20,4 +20,13 @@ describe('Parser', function () {
   it('should be able to parse a complex condition', () => {
     compileCondition(complex.condition).should.deep.equal(complex.parsedCondition);
   });
+
+  it('should be able to parse properties in all cases', () => {
+    const condition = 'fooBar = bar';
+    compileCondition(condition).should.deep.equal({
+      operator: '==',
+      property: ['fooBar'],
+      value: 'bar'
+    });
+  });
 });
