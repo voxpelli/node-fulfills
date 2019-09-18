@@ -2,7 +2,7 @@
 
 const chai = require('chai');
 
-chai.should();
+const should = chai.should();
 
 describe('Parser', function () {
   const compileCondition = require('../').compileCondition;
@@ -21,21 +21,47 @@ describe('Parser', function () {
     compileCondition(complex.condition).should.deep.equal(complex.parsedCondition);
   });
 
-  it('should be able to parse properties in all cases', () => {
-    const condition = 'fooBar = bar';
-    compileCondition(condition).should.deep.equal({
-      operator: '==',
-      property: ['fooBar'],
-      value: 'bar'
+  describe('property names', () => {
+    it('should be able to parse properties in all cases', () => {
+      const condition = 'fooBar = bar';
+      compileCondition(condition).should.deep.equal({
+        operator: '==',
+        property: ['fooBar'],
+        value: 'bar'
+      });
     });
-  });
 
-  it('should permit certain non-alpha characters', () => {
-    const condition = 'foo-bar_abc = bar';
-    compileCondition(condition).should.deep.equal({
-      operator: '==',
-      property: ['foo-bar_abc'],
-      value: 'bar'
+    it('should permit certain non-alpha characters', () => {
+      const condition = 'foo-bar_abc = bar';
+      compileCondition(condition).should.deep.equal({
+        operator: '==',
+        property: ['foo-bar_abc'],
+        value: 'bar'
+      });
+    });
+
+    it('should handle numbers in property names', () => {
+      const condition = 'foo123 = bar';
+      compileCondition(condition).should.deep.equal({
+        operator: '==',
+        property: ['foo123'],
+        value: 'bar'
+      });
+    });
+
+    it('should handle single char property names', () => {
+      const condition = 'f = bar';
+      compileCondition(condition).should.deep.equal({
+        operator: '==',
+        property: ['f'],
+        value: 'bar'
+      });
+    });
+
+    it('should not allow a non alpha characters in beginning of property name', () => {
+      should.Throw(function numeric () { compileCondition('123foo = bar'); }, /^Expected/);
+      should.Throw(function dash () { compileCondition('-foo = bar'); }, /^Expected/);
+      should.Throw(function underscore () { compileCondition('_foo = bar'); }, /^Expected/);
     });
   });
 });

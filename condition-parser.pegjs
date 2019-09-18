@@ -32,7 +32,7 @@ subProperty
   / '[]' tail:(subProperty)? { var result = { array: true }; if (tail) { result.property = tail; } return [result]; }
 
 property_name
-  = term:[a-zA-Z-_]+ { return term.join(''); }
+  = term:[a-zA-Z] tail:[a-zA-Z0-9-_]* { return term + tail.join(''); }
 
 value
   = quoted_value
