@@ -16,7 +16,7 @@
     "check:installed-check": "installed-check -i eslint",
     "check:lint": "eslint .",
     "prepublish": "npm run build",
-    "test:mocha": "NODE_ENV=test nyc --reporter=lcov --reporter text mocha test/**/*.spec.js",
+    "test:mocha": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter text mocha test/**/*.spec.js",
     "test": "run-p check:* && run-p test:*",
     "watch": "nodemon -e pegjs -x \"npm run build\""
   },
@@ -31,6 +31,7 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "coveralls": "^3.0.5",
+    "cross-env": "^6.0.0",
     "dependency-check": "^4.1.0",
     "eslint": "^6.1.0",
     "eslint-config-semistandard": "^14.0.0",
