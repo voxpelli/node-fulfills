@@ -5,6 +5,7 @@
 [![dependencies Status](https://david-dm.org/voxpelli/node-fulfills/status.svg)](https://david-dm.org/voxpelli/node-fulfills)
 [![Known Vulnerabilities](https://snyk.io/test/github/voxpelli/node-fulfills/badge.svg?targetFile=package.json)](https://snyk.io/test/github/voxpelli/node-fulfills?targetFile=package.json)
 [![js-semistandard-style](https://img.shields.io/badge/code%20style-semistandard-brightgreen.svg?style=flat)](https://github.com/Flet/semistandard)
+[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/voxpelli/node-fulfills.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/voxpelli/node-fulfills/context:javascript)
 
 Checks whether or not an object fulfills a specified condition
 
