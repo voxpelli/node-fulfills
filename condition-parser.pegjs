@@ -63,13 +63,14 @@ not_operator
   = ('NOT' _+ / 'not' _+ / '!' _*) { return 'NOT'; }
 
 comparison_operators
-  = '<'
-  / '>'
-  / '<='
+  ='<='
   / '>='
   / '==='
-  / ('=' / '==') { return '=='; }
+  / '!=='
+  / ('==' / '=') { return '=='; }
   / ('!=' / '<>') { return '!='; }
+  / '<'
+  / '>'
 
 char
   = unescaped

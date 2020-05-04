@@ -21,6 +21,25 @@ describe('Parser', function () {
     compileCondition(complex.condition).should.deep.equal(complex.parsedCondition);
   });
 
+  describe('comparison operators', () => {
+    const verify = (operator, alias) => compileCondition(`foo ${alias || operator} bar`).should.deep.equal({
+      operator,
+      property: ['foo'],
+      value: 'bar'
+    });
+
+    it('should be able to parse ===', () => { verify('==='); });
+    it('should be able to parse ==', () => { verify('=='); });
+    it('should be able to parse =', () => { verify('==', '='); });
+    it('should be able to parse !==', () => { verify('!=='); });
+    it('should be able to parse !=', () => { verify('!='); });
+    it('should be able to parse <>', () => { verify('!=', '<>'); });
+    it('should be able to parse >', () => { verify('>'); });
+    it('should be able to parse <', () => { verify('<'); });
+    it('should be able to parse >=', () => { verify('>='); });
+    it('should be able to parse <=', () => { verify('<='); });
+  });
+
   describe('property names', () => {
     it('should be able to parse properties in all cases', () => {
       const condition = 'fooBar = bar';
