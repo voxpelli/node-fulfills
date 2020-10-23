@@ -25,9 +25,11 @@ const matchValueAgainstCondition = function (value, condition) {
     case '>=':
       return value >= condition.value;
     case '==':
-      return value == condition.value; // eslint-disable-line
+      // eslint-disable-next-line eqeqeq
+      return value == condition.value;
     case '!=':
-      return value != condition.value; // eslint-disable-line
+      // eslint-disable-next-line eqeqeq
+      return value != condition.value;
     default:
       throw new Error('Unknown operator "' + condition.operator + '"');
   }
@@ -51,7 +53,7 @@ const matchIndividualCondition = function (obj, remainingProperty, condition) {
     }
     return obj.some(item => matchIndividualCondition(item, key.property, condition));
   } else if (typeof key !== 'string') {
-    throw new Error('Unknown key type');
+    throw new TypeError('Unknown key type');
   }
 
   return matchIndividualCondition(obj[key], remainingProperty, condition);

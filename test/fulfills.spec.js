@@ -4,10 +4,10 @@ const chai = require('chai');
 
 chai.should();
 
-describe('Fulfills', function () {
-  const fulfills = require('../');
-  const complex = require('./complex');
+const fulfills = require('..');
+const complex = require('./complex');
 
+describe('Fulfills', function () {
   let testObject;
 
   before(() => {

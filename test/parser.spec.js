@@ -4,10 +4,10 @@ const chai = require('chai');
 
 const should = chai.should();
 
-describe('Parser', function () {
-  const compileCondition = require('../').compileCondition;
-  const complex = require('./complex');
+const compileCondition = require('..').compileCondition;
+const complex = require('./complex');
 
+describe('Parser', function () {
   it('should be able to parse a simple condition', () => {
     const condition = 'foo = bar';
     compileCondition(condition).should.deep.equal({
