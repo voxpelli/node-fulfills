@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/consistent-function-scoping */
 'use strict';
 
 const chai = require('chai');
