@@ -2,39 +2,11 @@
 
 const queryParser = require('./condition-parser');
 
-/** @typedef {boolean|string|number} ConditionValue */
-
-/** @typedef {'===' | '!==' | '<' | '>' | '<=' | '>=' | '==' | '!='} ValueOperator */
-/** @typedef {'AND' | 'OR'} BoolOperator */
-
-/** @typedef {Array<string|ArrayProperty>} Property */
-/** @typedef {{ type: 'array', property?: Property }} ArrayProperty */
+/** @typedef {import('./condition-parser').Condition} Condition */
+/** @typedef {import('./condition-parser').ValueCondition} ValueCondition */
+/** @typedef {import('./condition-parser').DuoCondition} DuoCondition */
 
 /** @typedef {Record<string,any>} FulfillsInput */
-
-/**
- * @typedef ValueCondition
- * @property {Property} property
- * @property {ValueOperator} operator
- * @property {ConditionValue} value
- */
-
-/**
- * @typedef DuoCondition
- * @property {never} [property]
- * @property {BoolOperator} operator
- * @property {Condition} left
- * @property {Condition} right
- */
-
-/**
- * @typedef NotCondition
- * @property {never} [property]
- * @property {never} [operator]
- * @property {Condition} not
- */
-
-/** @typedef {ValueCondition | DuoCondition | NotCondition } Condition */
 
 /**
  * @param {string} query
@@ -80,7 +52,7 @@ const matchValueAgainstCondition = function (value, condition) {
 
 /**
  * @param {any} obj
- * @param {Property|undefined} remainingProperty
+ * @param {import('./condition-parser').Property|undefined} remainingProperty
  * @param {ValueCondition} condition
  * @returns {boolean}
  */

@@ -9,5 +9,9 @@
 /package-lock.json
 /yarn.lock
 
+# Generated types
+*.d.ts
+!/condition-parser.d.ts
+
 # Library specific ones
 /condition-parser.js
