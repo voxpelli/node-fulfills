@@ -101,13 +101,13 @@ describe('Fulfills', function () {
     it('should be able match a value in an array', () => {
       fulfills(testObject, {
         operator: '===',
-        property: ['list', { array: true }],
+        property: ['list', { type: 'array' }],
         value: 'sak1'
       }).should.be.ok;
 
       fulfills(testObject, {
         operator: '===',
-        property: ['list', { array: true }],
+        property: ['list', { type: 'array' }],
         value: 'error'
       }).should.not.be.ok;
     });
@@ -126,10 +126,10 @@ describe('Fulfills', function () {
         property: [
           'complex',
           {
-            array: true,
+            type: 'array',
             property: [
               'xyz',
-              { array: true }
+              { type: 'array' }
             ]
           }
         ],

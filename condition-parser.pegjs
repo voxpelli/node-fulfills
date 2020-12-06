@@ -29,7 +29,7 @@ property
 subProperty
   = '.' property:property { return property; }
   / '[' value:value ']' tail:(subProperty)? { return [value].concat(tail || []); }
-  / '[]' tail:(subProperty)? { var result = { array: true }; if (tail) { result.property = tail; } return [result]; }
+  / '[]' tail:(subProperty)? { var result = { type: 'array' }; if (tail) { result.property = tail; } return [result]; }
 
 property_name
   = term:[a-zA-Z] tail:[a-zA-Z0-9-_]* { return term + tail.join(''); }

@@ -2,10 +2,53 @@
 
 const queryParser = require('./condition-parser');
 
+/** @typedef {boolean|string|number} ConditionValue */
+
+/** @typedef {'===' | '!==' | '<' | '>' | '<=' | '>=' | '==' | '!='} ValueOperator */
+/** @typedef {'AND' | 'OR'} BoolOperator */
+
+/** @typedef {Array<string|ArrayProperty>} Property */
+/** @typedef {{ type: 'array', property?: Property }} ArrayProperty */
+
+/** @typedef {Record<string,any>} FulfillsInput */
+
+/**
+ * @typedef ValueCondition
+ * @property {Property} property
+ * @property {ValueOperator} operator
+ * @property {ConditionValue} value
+ */
+
+/**
+ * @typedef DuoCondition
+ * @property {never} [property]
+ * @property {BoolOperator} operator
+ * @property {Condition} left
+ * @property {Condition} right
+ */
+
+/**
+ * @typedef NotCondition
+ * @property {never} [property]
+ * @property {never} [operator]
+ * @property {Condition} not
+ */
+
+/** @typedef {ValueCondition | DuoCondition | NotCondition } Condition */
+
+/**
+ * @param {string} query
+ * @returns {Condition}
+ */
 const compileCondition = function (query) {
   return queryParser.parse(query);
 };
 
+/**
+ * @param {any} value
+ * @param {ValueCondition} condition
+ * @returns {boolean}
+ */
 const matchValueAgainstCondition = function (value, condition) {
   if (condition.operator === undefined && condition.value === undefined) {
     return !!value;
@@ -35,30 +78,40 @@ const matchValueAgainstCondition = function (value, condition) {
   }
 };
 
+/**
+ * @param {any} obj
+ * @param {Property|undefined} remainingProperty
+ * @param {ValueCondition} condition
+ * @returns {boolean}
+ */
 const matchIndividualCondition = function (obj, remainingProperty, condition) {
   if (obj === undefined || obj === null || !remainingProperty || !remainingProperty.length) {
     return matchValueAgainstCondition(obj, condition);
   }
 
-  remainingProperty = [].concat(remainingProperty);
+  const [key, ...nextInPropertyChain] = remainingProperty;
 
-  const key = remainingProperty.shift();
-
-  if (typeof key === 'object') {
-    if (!key.array) {
-      throw new Error('Unimplemented key type');
-    }
-    if (!Array.isArray(obj)) {
-      return false;
-    }
-    return obj.some(item => matchIndividualCondition(item, key.property, condition));
-  } else if (typeof key !== 'string') {
-    throw new TypeError('Unknown key type');
+  if (typeof key === 'string') {
+    return matchIndividualCondition(obj[key], nextInPropertyChain, condition);
   }
 
-  return matchIndividualCondition(obj[key], remainingProperty, condition);
+  // To support eg. arrays, we need some more complex types
+  if (typeof key === 'object') {
+    if (key.type === 'array') {
+      if (!Array.isArray(obj)) return false;
+      return obj.some(item => matchIndividualCondition(item, key.property, condition));
+    }
+    throw new Error('Unimplemented key type');
+  }
+
+  throw new TypeError('Unknown key type');
 };
 
+/**
+ * @param {FulfillsInput} obj
+ * @param {DuoCondition} condition
+ * @returns {boolean}
+ */
 const matchDuoCondition = function (obj, condition) {
   if (matchCondition(obj, condition.left)) {
     if (condition.operator === 'AND') {
@@ -77,22 +130,32 @@ const matchDuoCondition = function (obj, condition) {
   }
 };
 
+/**
+ * @param {FulfillsInput} obj
+ * @param {Condition} condition
+ * @returns {boolean}
+ */
 const matchCondition = function (obj, condition) {
-  if (condition.property) {
+  if (condition.property !== undefined) {
     return matchIndividualCondition(obj, condition.property, condition);
   }
 
-  if (condition.left && condition.right) {
-    return matchDuoCondition(obj, condition);
+  if (!condition.operator && condition.not) {
+    return !matchCondition(obj, condition.not);
   }
 
-  if (condition.not) {
-    return !matchCondition(obj, condition.not);
+  if (condition.operator && condition.left && condition.right) {
+    return matchDuoCondition(obj, condition);
   }
 
   throw new Error('Unimplemented condition structure');
 };
 
+/**
+ * @param {FulfillsInput} obj
+ * @param {string|Condition} condition
+ * @returns {boolean}
+ */
 const fulfills = function (obj, condition) {
   if (typeof condition === 'string') {
     condition = compileCondition(condition);

@@ -11,11 +11,11 @@ const parsedCondition = {
           'foo',
           'abc adf sdaf sda f',
           {
-            array: true,
+            type: 'array',
             property: [{
-              array: true,
+              type: 'array',
               property: [{
-                array: true
+                type: 'array'
               }]
             }]
           }
@@ -55,7 +55,7 @@ const parsedCondition = {
           property: [
             'foo',
             {
-              array: true
+              type: 'array'
             }
           ],
           operator: '==',
@@ -67,12 +67,12 @@ const parsedCondition = {
             'foo',
             'abc',
             {
-              array: true,
+              type: 'array',
               property: [
                 'bar',
                 'foo',
                 {
-                  array: true
+                  type: 'array'
                 }
               ]
             }
