@@ -15,9 +15,10 @@
     "check:dependency-check": "dependency-check *.js 'test/**/*.js' --no-dev",
     "check:installed-check": "installed-check -i eslint",
     "check:lint": "eslint .",
+    "check": "run-p check:*",
     "prepublish": "npm run build",
     "test:mocha": "cross-env NODE_ENV=test c8 --reporter=lcov --reporter text mocha test/**/*.spec.js",
-    "test": "run-p check:* && run-p test:*",
+    "test": "run-s check test:*",
     "watch": "nodemon -e pegjs -x \"npm run build\""
   },
   "husky": {
