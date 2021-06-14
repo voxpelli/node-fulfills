@@ -23,6 +23,11 @@ describe('Parser', function () {
   });
 
   describe('comparison operators', () => {
+    /**
+     * @param {string} operator
+     * @param {string} [alias]
+     * @returns {Chai.Equal}
+     */
     const verify = (operator, alias) => compileCondition(`foo ${alias || operator} bar`).should.deep.equal({
       operator,
       property: ['foo'],
@@ -42,12 +47,22 @@ describe('Parser', function () {
   });
 
   describe('logical operators', () => {
+    /**
+     * @param {string} operator
+     * @param {string} [alias]
+     * @returns {Chai.Equal}
+     */
     const verify = (operator, alias) => compileCondition(`foo ${alias || operator} bar`).should.deep.equal({
       operator,
       left: { property: ['foo'] },
       right: { property: ['bar'] }
     });
 
+    /**
+     * @param {string} operator
+     * @param {string} [alias]
+     * @returns {Chai.Equal}
+     */
     const verifyNegation = (operator, alias) => compileCondition(`${alias || operator} foo`).should.deep.equal({
       not: { property: ['foo'] }
     });

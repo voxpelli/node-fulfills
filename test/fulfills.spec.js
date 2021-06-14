@@ -8,6 +8,7 @@ const fulfills = require('..');
 const complex = require('./complex');
 
 describe('Fulfills', function () {
+  /** @type {import('..').FulfillsInput} */
   let testObject;
 
   before(() => {

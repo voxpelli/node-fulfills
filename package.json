@@ -10,6 +10,15 @@
     "url": "git://github.com/voxpelli/node-fulfills.git"
   },
   "main": "index.js",
+  "types": "index.d.ts",
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "index.d.ts.map",
+    "condition-parser.js",
+    "condition-parser.d.ts",
+    "condition-parser.d.ts.map"
+  ],
   "scripts": {
     "build:0": "run-s clean",
     "build:1:pegjs": "pegjs condition-parser.pegjs condition-parser.js",
@@ -36,7 +45,9 @@
     "node": ">=12.0.0"
   },
   "devDependencies": {
-    "@types/node": "^12.0.0",
+    "@types/chai": "^4.2.18",
+    "@types/mocha": "^8.2.2",
+    "@types/node": "^12.20.15",
     "@voxpelli/eslint-config": "9.0.0",
     "@voxpelli/eslint-config-jsdoc-ts": "^0.3.1",
     "@voxpelli/tsconfig": "^2.0.1",
@@ -61,6 +72,6 @@
     "nodemon": "^2.0.0",
     "npm-run-all": "^4.1.5",
     "pegjs": "^0.9.0",
-    "typescript": "^4.1.2"
+    "typescript": "^4.3.2"
   }
 }

@@ -1,6 +1,7 @@
 'use strict';
 
 const condition = '!(bookmark.bar-car.foo["abc adf sdaf sda f"][][][]=123) AND foo OR bar=abc OR foo="\\\\" OR foo[]=123 OR foo.abc[].bar.foo[] != true';
+/** @type {import('..').Condition} */
 const parsedCondition = {
   left: {
     left: {

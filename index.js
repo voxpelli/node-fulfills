@@ -3,10 +3,14 @@
 const queryParser = require('./condition-parser');
 
 /** @typedef {import('./condition-parser').Condition} Condition */
+/** @typedef {import('./condition-parser').TruthyCondition} TruthyCondition */
+/** @typedef {import('./condition-parser').NumericValueCondition} NumericValueCondition */
 /** @typedef {import('./condition-parser').ValueCondition} ValueCondition */
 /** @typedef {import('./condition-parser').DuoCondition} DuoCondition */
 
-/** @typedef {Record<string,any>} FulfillsInput */
+/** @typedef {undefined|boolean|null|number|string|{ [Key in string]?: FulfillsInputValue }} FulfillsInputValueRaw */
+/** @typedef {FulfillsInputValueRaw|FulfillsInputValueRaw[]} FulfillsInputValue */
+/** @typedef {{ [Key in string]?: FulfillsInputValue }} FulfillsInput */
 
 /**
  * @param {string} query
@@ -17,20 +21,15 @@ const compileCondition = function (query) {
 };
 
 /**
- * @param {any} value
- * @param {ValueCondition} condition
+ * @param {number} value
+ * @param {NumericValueCondition} condition
  * @returns {boolean}
  */
-const matchValueAgainstCondition = function (value, condition) {
-  if (condition.operator === undefined && condition.value === undefined) {
-    return !!value;
+const matchNumericValueAgainstCondition = function (value, condition) {
+  if (typeof condition.value !== 'number') {
+    throw new TypeError(`Expected a numeric condition value for operator "${condition.operator}", instead got: ${typeof condition.value}`);
   }
-
   switch (condition.operator) {
-    case '===':
-      return value === condition.value;
-    case '!==':
-      return value !== condition.value;
     case '<':
       return value < condition.value;
     case '>':
@@ -39,21 +38,55 @@ const matchValueAgainstCondition = function (value, condition) {
       return value <= condition.value;
     case '>=':
       return value >= condition.value;
+    default:
+      // @ts-ignore
+      throw new Error(`Unknown operator "${condition.operator}"`);
+  }
+};
+
+/**
+ * @param {FulfillsInputValue} value
+ * @param {TruthyCondition|ValueCondition} condition
+ * @returns {boolean}
+ */
+const matchValueAgainstCondition = function (value, condition) {
+  if (condition.operator === undefined && condition.value === undefined) {
+    return !!value;
+  }
+
+  if (typeof condition.operator !== 'string') {
+    throw new TypeError(`Expected a string operator, instead got: ${condition.operator}`);
+  }
+
+  switch (condition.operator) {
+    case '===':
+      return value === condition.value;
+    case '!==':
+      return value !== condition.value;
     case '==':
       // eslint-disable-next-line eqeqeq
       return value == condition.value;
     case '!=':
       // eslint-disable-next-line eqeqeq
       return value != condition.value;
+    case '<':
+    case '>':
+    case '<=':
+    case '>=':
+      if (typeof value !== 'number') {
+        throw new TypeError(`Expected a numeric value to for use with operator "${condition.operator}", instead got: ${typeof value}`);
+      }
+      return matchNumericValueAgainstCondition(value, condition);
     default:
-      throw new Error('Unknown operator "' + condition.operator + '"');
+      // @ts-ignore
+      throw new Error(`Unknown operator "${condition.operator}"`);
   }
 };
 
 /**
- * @param {any} obj
+ * @param {FulfillsInputValue} obj
  * @param {import('./condition-parser').Property|undefined} remainingProperty
- * @param {ValueCondition} condition
+ * @param {TruthyCondition|ValueCondition} condition
  * @returns {boolean}
  */
 const matchIndividualCondition = function (obj, remainingProperty, condition) {
@@ -64,7 +97,18 @@ const matchIndividualCondition = function (obj, remainingProperty, condition) {
   const [key, ...nextInPropertyChain] = remainingProperty;
 
   if (typeof key === 'string') {
-    return matchIndividualCondition(obj[key], nextInPropertyChain, condition);
+    /** @type {FulfillsInputValue} */
+    let objValueByKey;
+
+    if (Array.isArray(obj) || typeof obj === 'string') {
+      if (key === 'length') {
+        objValueByKey = obj[key];
+      }
+    } else if (typeof obj === 'object') {
+      objValueByKey = obj[key];
+    }
+
+    return matchIndividualCondition(objValueByKey, nextInPropertyChain, condition);
   }
 
   // To support eg. arrays, we need some more complex types
@@ -80,7 +124,7 @@ const matchIndividualCondition = function (obj, remainingProperty, condition) {
 };
 
 /**
- * @param {FulfillsInput} obj
+ * @param {FulfillsInputValue} obj
  * @param {DuoCondition} condition
  * @returns {boolean}
  */
@@ -91,19 +135,19 @@ const matchDuoCondition = function (obj, condition) {
     } else if (condition.operator === 'OR') {
       return true;
     } else {
-      throw new Error('Unknown operator "' + condition.operator + '"');
+      throw new Error(`Unknown operator "${condition.operator}"`);
     }
   } else if (condition.operator === 'AND') {
     return false;
   } else if (condition.operator === 'OR') {
     return matchCondition(obj, condition.right);
   } else {
-    throw new Error('Unknown operator "' + condition.operator + '"');
+    throw new Error(`Unknown operator "${condition.operator}"`);
   }
 };
 
 /**
- * @param {FulfillsInput} obj
+ * @param {FulfillsInputValue} obj
  * @param {Condition} condition
  * @returns {boolean}
  */
