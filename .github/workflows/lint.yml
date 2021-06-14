@@ -1,3 +1,8 @@
+env: {}
+
+# FILE GENERATED WITH: npx ghat voxpelli/ghatemplates/lint
+# SOURCE: https://github.com/voxpelli/ghatemplates
+
 name: Linting
 
 on:
@@ -5,19 +10,19 @@ on:
   - pull_request
 
 jobs:
-  lint:
-    name: Static code analysis / Linting
+  test:
+    name: Node ${{ matrix.node_version }} on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
-        node_version: [12]
+        node_version: [14]
         os: [ubuntu-latest]
-
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node_version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node_version }}
-    - run: yarn install
-    - run: yarn run check
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node_version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node_version }}
+      - run: npm install
+      - run: npm run check
