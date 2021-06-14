@@ -31,7 +31,7 @@
     "check": "run-p check:*",
     "clean:declarations": "rm -rf $(find . -maxdepth 2 -type f -name '*.d.ts' ! -name 'condition-parser.d.ts')",
     "clean": "run-p clean:*",
-    "prepublishOnly": "run-s build",
+    "prepare": "run-s build",
     "sync-gh-actions": "ghat",
     "test:mocha": "cross-env NODE_ENV=test c8 --reporter=lcov --reporter text mocha test/**/*.spec.js",
     "test-ci": "run-s test:*",
