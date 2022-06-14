@@ -39,7 +39,7 @@
     "watch": "nodemon -e pegjs -x \"npm run build\""
   },
   "engines": {
-    "node": ">=12.0.0"
+    "node": "^14.18.0 || >=16.0.0"
   },
   "devDependencies": {
     "@types/chai": "^4.2.18",
