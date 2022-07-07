@@ -29,7 +29,7 @@
     "check:0": "run-s build-for-test",
     "check:1:dependency-check": "dependency-check *.js 'test/**/*.js' --no-dev",
     "check:1:installed-check": "installed-check -i eslint-plugin-jsdoc -i npm-run-all2",
-    "check:1:lint": "eslint .",
+    "check:1:lint": "eslint --report-unused-disable-directives .",
     "check:1:tsc": "tsc",
     "check:1:type-coverage": "type-coverage --detail --strict --at-least 99 --ignore-files 'test/*'",
     "check:1": "run-p -c --aggregate-output check:1:*",
