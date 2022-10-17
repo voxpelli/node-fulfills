@@ -26,21 +26,26 @@ const compileCondition = function (query) {
  * @returns {boolean}
  */
 const matchNumericValueAgainstCondition = function (value, condition) {
-  if (typeof condition.value !== 'number') {
-    throw new TypeError(`Expected a numeric condition value for operator "${condition.operator}", instead got: ${typeof condition.value}`);
+  const {
+    operator,
+    value: conditionValue
+  } = condition;
+
+  if (typeof conditionValue !== 'number') {
+    throw new TypeError(`Expected a numeric condition value for operator "${operator}", instead got: ${typeof conditionValue}`);
   }
-  switch (condition.operator) {
+
+  switch (operator) {
     case '<':
-      return value < condition.value;
+      return value < conditionValue;
     case '>':
-      return value > condition.value;
+      return value > conditionValue;
     case '<=':
-      return value <= condition.value;
+      return value <= conditionValue;
     case '>=':
-      return value >= condition.value;
+      return value >= conditionValue;
     default:
-      // @ts-ignore
-      throw new Error(`Unknown operator "${condition.operator}"`);
+      throw new Error(`Unknown operator "${operator}"`);
   }
 };
 
@@ -50,36 +55,40 @@ const matchNumericValueAgainstCondition = function (value, condition) {
  * @returns {boolean}
  */
 const matchValueAgainstCondition = function (value, condition) {
-  if (condition.operator === undefined && condition.value === undefined) {
+  const {
+    operator,
+    value: conditionValue
+  } = condition;
+
+  if (operator === undefined && conditionValue === undefined) {
     return !!value;
   }
 
-  if (typeof condition.operator !== 'string') {
-    throw new TypeError(`Expected a string operator, instead got: ${condition.operator}`);
+  if (typeof operator !== 'string') {
+    throw new TypeError(`Expected a string operator, instead got: ${operator}`);
   }
 
-  switch (condition.operator) {
+  switch (operator) {
     case '===':
-      return value === condition.value;
+      return value === conditionValue;
     case '!==':
-      return value !== condition.value;
+      return value !== conditionValue;
     case '==':
       // eslint-disable-next-line eqeqeq
-      return value == condition.value;
+      return value == conditionValue;
     case '!=':
       // eslint-disable-next-line eqeqeq
-      return value != condition.value;
+      return value != conditionValue;
     case '<':
     case '>':
     case '<=':
     case '>=':
       if (typeof value !== 'number') {
-        throw new TypeError(`Expected a numeric value to for use with operator "${condition.operator}", instead got: ${typeof value}`);
+        throw new TypeError(`Expected a numeric value to for use with operator "${operator}", instead got: ${typeof value}`);
       }
       return matchNumericValueAgainstCondition(value, condition);
     default:
-      // @ts-ignore
-      throw new Error(`Unknown operator "${condition.operator}"`);
+      throw new Error(`Unknown operator "${operator}"`);
   }
 };
 
