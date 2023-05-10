@@ -19,13 +19,13 @@ describe('Fulfills', function () {
       list: [
         'sak1',
         'sak2',
-        'sak3'
+        'sak3',
       ],
       complex: [
         { xyz: ['bob1', 'bob2'] },
-        { xyz: ['bob3', 'bob4', 'bob5'] }
+        { xyz: ['bob3', 'bob4', 'bob5'] },
       ],
-      abc: { def: { ghi: 'bar' } }
+      abc: { def: { ghi: 'bar' } },
     };
   });
 
@@ -34,7 +34,7 @@ describe('Fulfills', function () {
       fulfills(testObject, {
         operator: '===',
         property: ['foo'],
-        value: 'bar'
+        value: 'bar',
       }).should.be.ok;
     });
 
@@ -42,7 +42,7 @@ describe('Fulfills', function () {
       fulfills(testObject, {
         operator: '===',
         property: ['abc', 'def', 'ghi'],
-        value: 'bar'
+        value: 'bar',
       }).should.be.ok;
     });
 
@@ -93,7 +93,7 @@ describe('Fulfills', function () {
       fulfills(testObject, {
         operator: '!=',
         property: ['nonexisting', 'def', 'ghi'],
-        value: 'bar'
+        value: 'bar',
       }).should.be.ok;
     });
   });
@@ -103,13 +103,13 @@ describe('Fulfills', function () {
       fulfills(testObject, {
         operator: '===',
         property: ['list', { type: 'array' }],
-        value: 'sak1'
+        value: 'sak1',
       }).should.be.ok;
 
       fulfills(testObject, {
         operator: '===',
         property: ['list', { type: 'array' }],
-        value: 'error'
+        value: 'error',
       }).should.not.be.ok;
     });
 
@@ -117,7 +117,7 @@ describe('Fulfills', function () {
       fulfills(testObject, {
         operator: '===',
         property: ['list'],
-        value: 'sak1'
+        value: 'sak1',
       }).should.not.be.ok;
     });
 
@@ -130,11 +130,11 @@ describe('Fulfills', function () {
             type: 'array',
             property: [
               'xyz',
-              { type: 'array' }
-            ]
-          }
+              { type: 'array' },
+            ],
+          },
         ],
-        value: 'bob4'
+        value: 'bob4',
       }).should.be.ok;
     });
   });
@@ -145,14 +145,14 @@ describe('Fulfills', function () {
         left: {
           operator: '===',
           property: ['foo'],
-          value: 'error'
+          value: 'error',
         },
         operator: 'OR',
         right: {
           operator: '===',
           property: ['foo'],
-          value: 'bar'
-        }
+          value: 'bar',
+        },
       }).should.be.ok;
     });
 
@@ -161,28 +161,28 @@ describe('Fulfills', function () {
         left: {
           operator: '===',
           property: ['foo'],
-          value: 'bar'
+          value: 'bar',
         },
         operator: 'AND',
         right: {
           operator: '===',
           property: ['abc', 'def', 'ghi'],
-          value: 'bar'
-        }
+          value: 'bar',
+        },
       }).should.be.ok;
 
       fulfills(testObject, {
         left: {
           operator: '===',
           property: ['foo'],
-          value: 'bar'
+          value: 'bar',
         },
         operator: 'AND',
         right: {
           operator: '===',
           property: ['foo'],
-          value: 'error'
-        }
+          value: 'error',
+        },
       }).should.not.be.ok;
     });
 
@@ -191,8 +191,8 @@ describe('Fulfills', function () {
         not: {
           operator: '===',
           property: ['foo'],
-          value: 'error'
-        }
+          value: 'error',
+        },
       }).should.be.ok;
     });
   });

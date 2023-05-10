@@ -16,39 +16,39 @@ const parsedCondition = {
             property: [{
               type: 'array',
               property: [{
-                type: 'array'
-              }]
-            }]
-          }
+                type: 'array',
+              }],
+            }],
+          },
         ],
         operator: '==',
-        value: 123
-      }
+        value: 123,
+      },
     },
     operator: 'AND',
     right: {
       property: [
-        'foo'
-      ]
-    }
+        'foo',
+      ],
+    },
   },
   operator: 'OR',
   right: {
     left: {
       property: [
-        'bar'
+        'bar',
       ],
       operator: '==',
-      value: 'abc'
+      value: 'abc',
     },
     operator: 'OR',
     right: {
       left: {
         property: [
-          'foo'
+          'foo',
         ],
         operator: '==',
-        value: '\\'
+        value: '\\',
       },
       operator: 'OR',
       right: {
@@ -56,11 +56,11 @@ const parsedCondition = {
           property: [
             'foo',
             {
-              type: 'array'
-            }
+              type: 'array',
+            },
           ],
           operator: '==',
-          value: 123
+          value: 123,
         },
         operator: 'OR',
         right: {
@@ -73,20 +73,20 @@ const parsedCondition = {
                 'bar',
                 'foo',
                 {
-                  type: 'array'
-                }
-              ]
-            }
+                  type: 'array',
+                },
+              ],
+            },
           ],
           operator: '!=',
-          value: true
-        }
-      }
-    }
-  }
+          value: true,
+        },
+      },
+    },
+  },
 };
 
 module.exports = {
   condition,
-  parsedCondition
+  parsedCondition,
 };

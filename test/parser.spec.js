@@ -14,7 +14,7 @@ describe('Parser', function () {
     compileCondition(condition).should.deep.equal({
       operator: '==',
       property: ['foo'],
-      value: 'bar'
+      value: 'bar',
     });
   });
 
@@ -31,7 +31,7 @@ describe('Parser', function () {
     const verify = (operator, alias) => compileCondition(`foo ${alias || operator} bar`).should.deep.equal({
       operator,
       property: ['foo'],
-      value: 'bar'
+      value: 'bar',
     });
 
     it('should be able to parse ===', () => { verify('==='); });
@@ -55,7 +55,7 @@ describe('Parser', function () {
     const verify = (operator, alias) => compileCondition(`foo ${alias || operator} bar`).should.deep.equal({
       operator,
       left: { property: ['foo'] },
-      right: { property: ['bar'] }
+      right: { property: ['bar'] },
     });
 
     /**
@@ -64,7 +64,7 @@ describe('Parser', function () {
      * @returns {Chai.Equal}
      */
     const verifyNegation = (operator, alias) => compileCondition(`${alias || operator} foo`).should.deep.equal({
-      not: { property: ['foo'] }
+      not: { property: ['foo'] },
     });
 
     it('should be able to parse "AND"', () => { verify('AND'); });
@@ -86,7 +86,7 @@ describe('Parser', function () {
       compileCondition(condition).should.deep.equal({
         operator: '==',
         property: ['fooBar'],
-        value: 'bar'
+        value: 'bar',
       });
     });
 
@@ -95,7 +95,7 @@ describe('Parser', function () {
       compileCondition(condition).should.deep.equal({
         operator: '==',
         property: ['foo-bar_abc'],
-        value: 'bar'
+        value: 'bar',
       });
     });
 
@@ -104,7 +104,7 @@ describe('Parser', function () {
       compileCondition(condition).should.deep.equal({
         operator: '==',
         property: ['foo123'],
-        value: 'bar'
+        value: 'bar',
       });
     });
 
@@ -113,7 +113,7 @@ describe('Parser', function () {
       compileCondition(condition).should.deep.equal({
         operator: '==',
         property: ['f'],
-        value: 'bar'
+        value: 'bar',
       });
     });
 

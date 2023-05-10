@@ -28,7 +28,7 @@ const compileCondition = function (query) {
 const matchNumericValueAgainstCondition = function (value, condition) {
   const {
     operator,
-    value: conditionValue
+    value: conditionValue,
   } = condition;
 
   if (typeof conditionValue !== 'number') {
@@ -57,7 +57,7 @@ const matchNumericValueAgainstCondition = function (value, condition) {
 const matchValueAgainstCondition = function (value, condition) {
   const {
     operator,
-    value: conditionValue
+    value: conditionValue,
   } = condition;
 
   if (operator === undefined && conditionValue === undefined) {
