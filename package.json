@@ -67,10 +67,10 @@
     "eslint-plugin-sort-destructure-keys": "^1.5.0",
     "eslint-plugin-unicorn": "^47.0.0",
     "husky": "^8.0.3",
-    "installed-check": "^6.0.4",
+    "installed-check": "^7.0.0",
     "mocha": "^10.2.0",
     "nodemon": "^2.0.22",
-    "npm-run-all2": "^6.0.2",
+    "npm-run-all2": "^6.0.5",
     "pegjs": "^0.9.0",
     "type-coverage": "^2.25.3",
     "typescript": "~5.0.4"
