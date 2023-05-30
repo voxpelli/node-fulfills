@@ -1,4 +1,12 @@
-# Fulfills
+<div align="center">
+  <img
+    src="fulfills.svg"
+    width="650"
+    height="auto"
+  />
+</div>
+
+<div align="center">
 
 [![npm version](https://img.shields.io/npm/v/fulfills.svg?style=flat)](https://www.npmjs.com/package/fulfills)
 [![npm downloads](https://img.shields.io/npm/dm/fulfills.svg?style=flat)](https://www.npmjs.com/package/fulfills)
@@ -6,6 +14,8 @@
 [![Types in JS](https://img.shields.io/badge/types_in_js-yes-brightgreen)](https://github.com/voxpelli/types-in-js)
 [![js-semistandard-style](https://img.shields.io/badge/code%20style-semistandard-brightgreen.svg)](https://github.com/voxpelli/eslint-config)
 [![Follow @voxpelli@mastodon.social](https://img.shields.io/mastodon/follow/109247025527949675?domain=https%3A%2F%2Fmastodon.social&style=social)](https://mastodon.social/@voxpelli)
+
+</div>
 
 Checks whether or not an object fulfills a specified condition
 
