@@ -72,6 +72,6 @@
     "npm-run-all2": "^6.0.5",
     "pegjs": "^0.9.0",
     "type-coverage": "^2.26.0",
-    "typescript": "~5.0.4"
+    "typescript": "~5.1.6"
   }
 }
