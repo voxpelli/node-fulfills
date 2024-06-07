@@ -44,12 +44,12 @@
     "watch": "nodemon -e pegjs -x \"npm run build\""
   },
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=18.0.0"
   },
   "devDependencies": {
     "@types/chai": "^4.3.5",
     "@types/mocha": "^10.0.1",
-    "@types/node": "^16.18.39",
+    "@types/node": "^18.19.34",
     "@voxpelli/eslint-config": "^19.0.0",
     "@voxpelli/tsconfig": "^8.0.0",
     "c8": "^8.0.0",
