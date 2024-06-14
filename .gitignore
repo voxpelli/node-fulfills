@@ -10,9 +10,8 @@
 /yarn.lock
 
 # Generated types
-*.d.ts
-*.d.ts.map
-!/condition-parser.d.ts
+/index.d.ts
+/index.d.ts.map
 
 # Library specific ones
 /condition-parser.js

@@ -35,14 +35,23 @@ describe('Parser', function () {
     });
 
     it('should be able to parse ===', () => { verify('==='); });
+
     it('should be able to parse ==', () => { verify('=='); });
+
     it('should be able to parse =', () => { verify('==', '='); });
+
     it('should be able to parse !==', () => { verify('!=='); });
+
     it('should be able to parse !=', () => { verify('!='); });
+
     it('should be able to parse <>', () => { verify('!=', '<>'); });
+
     it('should be able to parse >', () => { verify('>'); });
+
     it('should be able to parse <', () => { verify('<'); });
+
     it('should be able to parse >=', () => { verify('>='); });
+
     it('should be able to parse <=', () => { verify('<='); });
   });
 
@@ -68,15 +77,21 @@ describe('Parser', function () {
     });
 
     it('should be able to parse "AND"', () => { verify('AND'); });
+
     it('should be able to parse "and"', () => { verify('AND', 'and'); });
+
     it('should be able to parse "&&"', () => { verify('AND', '&&'); });
 
     it('should be able to parse "OR"', () => { verify('OR'); });
+
     it('should be able to parse "or"', () => { verify('OR', 'or'); });
+
     it('should be able to parse "||"', () => { verify('OR', '||'); });
 
     it('should be able to parse "NOT"', () => { verifyNegation('NOT'); });
+
     it('should be able to parse "not"', () => { verifyNegation('NOT', 'not'); });
+
     it('should be able to parse "!"', () => { verifyNegation('NOT', '!'); });
   });
 
