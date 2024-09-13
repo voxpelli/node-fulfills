@@ -1,14 +1,14 @@
 export type Condition = TruthyCondition | ValueCondition | DuoCondition | NotCondition;
 export type ConditionValue = string | number | boolean;
 
-export type BasicValueOperator = "===" | "!==" | "==" | "!=";
-export type NumericValueOperator = "<=" | ">=" | "<" | ">";
+export type BasicValueOperator = '===' | '!==' | '==' | '!=';
+export type NumericValueOperator = '<=' | '>=' | '<' | '>';
 export type ValueOperator = BasicValueOperator | NumericValueOperator;
-export type BoolOperator = "AND" | "OR";
+export type BoolOperator = 'AND' | 'OR';
 export type Property = (string | ArrayProperty)[];
 export type ArrayProperty = {
-    type: 'array';
-    property?: Property | undefined;
+  type: 'array';
+  property?: Property | undefined;
 };
 export type TruthyCondition = {
   property: Property;
@@ -27,14 +27,14 @@ export type NumericValueCondition = {
 };
 export type ValueCondition = BasicValueCondition | NumericValueCondition;
 export type DuoCondition = {
-    property?: undefined;
-    operator: BoolOperator;
-    left: Condition;
-    right: Condition;
+  property?: undefined;
+  operator: BoolOperator;
+  left: Condition;
+  right: Condition;
 };
 export type NotCondition = {
-    property?: undefined;
-    operator?: undefined;
-    not: Condition;
+  property?: undefined;
+  operator?: undefined;
+  not: Condition;
 };
-export declare function parse(input: string): Condition;
+export declare function parse (input: string): Condition;

@@ -1,5 +1,4 @@
 {
   "$schema": "https://unpkg.com/knip@5/schema.json",
-  "ignore": ["condition-parser.d.ts"],
-  "ignoreDependencies": ["@types/mocha"]
+  "ignore": ["condition-parser.d.ts"]
 }
