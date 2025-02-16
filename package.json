@@ -1,6 +1,6 @@
 {
   "name": "fulfills",
-  "version": "4.0.1",
+  "version": "5.0.0",
   "license": "MIT",
   "description": "Checks whether or not an object fulfills a specified condition",
   "author": "Pelle Wessman <pelle@kodfabrik.se> (http://kodfabrik.se/)",
